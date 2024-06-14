@@ -10,7 +10,7 @@ return {
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
-    
+
     telescope.setup({
       defaults = {
         path_display = { "smart" },
@@ -21,11 +21,60 @@ return {
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
           },
         },
+        entry_prefix = "  ",
+        prompt_prefix = "   ",
+        selection_caret = "  ",
+        color_devicons = true,
+        dynamic_preview_title = true,
+        sorting_strategy = "ascending",
+        layout_strategy = "horizontal",
+        layout_config = {
+          horizontal = {
+            -- height = om.on_big_screen() and 0.6 or 0.95,
+            preview_width = 0.55,
+            prompt_position = "top",
+            width = 0.9,
+          },
+          center = {
+            anchor = "N",
+            width = 0.9,
+            preview_cutoff = 10,
+          },
+          vertical = {
+            -- height = om.on_big_screen() and 0.4 or 0.9,
+            preview_height = 0.3,
+            width = 0.9,
+            preview_cutoff = 10,
+            prompt_position = "top",
+          },
+
+          -- Searching
+          -- set_env = { COLORTERM = "truecolor" },
+          -- file_ignore_patterns = {
+          --   ".git/",
+          --   "%.jpg",
+          --   "%.jpeg",
+          --   "%.png",
+          --   "%.svg",
+          --   "%.otf",
+          --   "%.ttf",
+          --   "%.lock",
+          --   "__pycache__",
+          --   "%.sqlite3",
+          --   "%.ipynb",
+          --   "vendor",
+          --   "node_modules",
+          --   "dotbot",
+          -- },
+          -- file_sorter = require("telescope.sorters").get_fuzzy_file,
+        },
       },
     })
-    
+
+    -- Extensions
     telescope.load_extension("fzf")
-  
+    telescope.load_extension("aerial")
+    -- telescope.load_extension("refactoring")
     -- set keymaps
     local keymap = vim.keymap -- for conciseness
 

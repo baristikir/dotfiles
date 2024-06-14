@@ -1,6 +1,14 @@
 return {
   "goolord/alpha-nvim",
   event = "VimEnter",
+  init = function()
+    require("legendary").commands({
+      {
+        ":Alpha",
+        description = "Show the Alpha dashboard",
+      },
+    })
+  end,
   config = function()
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
@@ -16,6 +24,8 @@ return {
       "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
       "                                                     ",
     }
+    dashboard.section.terminal.width = 69
+    dashboard.section.terminal.height = 8
 
     -- Set menu
     dashboard.section.buttons.val = {
@@ -32,6 +42,5 @@ return {
 
     -- Disable folding on alpha buffer
     vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
-
   end,
 }
